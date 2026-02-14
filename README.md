@@ -13,3 +13,4 @@ Once relevant passages are retrieved, the generator produces the final response.
 
 ### Evaluation and Metrics
 The system is evaluated using metrics defined for ranked retrieval and question answering:Retrieval performance is measured using Mean Average Precision (MAP) or interpolated precision. Answer accuracy for factoid questions is evaluated via exact match or token F1 score.
+
