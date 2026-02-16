@@ -12,12 +12,7 @@ import numpy as np
 from datasets import load_dataset
 from bs4 import BeautifulSoup
 from sentence_transformers import SentenceTransformer
-import json
-import faiss
-import numpy as np
-from datasets import load_dataset
-from bs4 import BeautifulSoup
-from sentence_transformers import SentenceTransformer
+
 
 def clean_html(html_content):
     soup = BeautifulSoup(html_content, "html.parser")
