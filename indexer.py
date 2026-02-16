@@ -1,3 +1,17 @@
+'''
+This script processes a dataset of HTML documents for Retrieval-Augmented Generation (RAG):
+ - Cleans and chunks HTML content into text segments
+ - Generates embeddings for each chunk using a SentenceTransformer model
+ - Builds a FAISS vector index for similarity search
+ - Stores chunk metadata (text and source URL) in a JSON file
+'''
+
+import json
+import faiss
+import numpy as np
+from datasets import load_dataset
+from bs4 import BeautifulSoup
+from sentence_transformers import SentenceTransformer
 import json
 import faiss
 import numpy as np
