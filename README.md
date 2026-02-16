@@ -1,16 +1,67 @@
-# Consistency-Gated-RAG
- 
-Consistency-Gated RAG is a hybrid Question Answering (QA) framework designed to optimize the balance between a model's parametric memory and external evidence. While large language models (LLMs) store facts in their parameters, they are often poorly calibrated, leading to hallucinations. This project implements an adaptive pipeline that triggers Retrieval-Augmented Generation (RAG) only when the model's internal knowledge is detected as unstable.
+# Consistency-Gated RAG with Mistral AI
 
-## Phase I: The Self-Consistency Router
-The system first attempts to answer the query using the model's internal knowledge, a task known as closed book QA.The router queries the model N times with high temperature to measure answer stability. If responses diverge, it indicates the model is not well-calibrated and may be hallucinating. Low stability triggers the transition to open book QA via the retrieval pipeline.
+A robust Retrieval-Augmented Generation (RAG) system implementing a **Consistency-Gated** routing mechanism. This project acts as an intelligent assistant that queries an external knowledge base only when the Large Language Model (LLM) exhibits uncertainty, optimizing for both latency and factual accuracy.
 
-## Phase II: Dense Retrieval Index
-To resolve the vocabulary mismatch problem inherent in sparse systems, this project utilizes dense retrieval.Document collections like MS MARCO or Natural Questions are processed into passages. These passages are represented as dense vectors (embeddings) computed by the language model. The system uses FAISS to perform efficient nearest neighbor search.
+## Core Concept
 
-## Phase III: Grounded Generation
-Once relevant passages are retrieved, the generator produces the final response.The prompt includes the original query and the retrieved passages to ensure the answer is grounded in curated facts. The generation includes knowledge citations to provide verifiable evidence and increase user confidence. 
+Standard RAG systems retrieve documents for every query, which increases latency and cost. This project implements an **Active RAG** approach:
 
-### Evaluation and Metrics
-The system is evaluated using metrics defined for ranked retrieval and question answering:Retrieval performance is measured using Mean Average Precision (MAP) or interpolated precision. Answer accuracy for factoid questions is evaluated via exact match or token F1 score.
+1.  **Consistency Check**: The system queries the LLM (Mistral) multiple times (Self-Consistency).
+2.  **Similarity Analysis**: It computes the cosine similarity between the generated answers.
+3.  **Routing**:
+    * **High Consistency**: The model is confident. Return the direct answer.
+    * **Low Consistency**: The model is hallucinating or unsure. Trigger the **Dense Retrieval** pipeline to ground the answer in factual documents.
 
+This aligns with modern NLP research on calibration and retrieval-augmented generation 
+
+## Architecture
+
+The project consists of three independent modules:
+
+* **`indexer.py` (Offline)**: 
+    * Ingests the Google Natural Questions dataset.
+    * Cleans and chunks HTML documents.
+    * [cite_start]Encodes text using a Bi-Encoder (`all-MiniLM-L6-v2`)[cite: 483].
+    * Builds a FAISS Vector Index for efficient similarity search.
+* **`rag.py` (Retriever)**:
+    * Loads the FAISS index.
+    * Performs semantic search to retrieve top-k relevant context.
+    * Generates a grounded response using Mistral Small.
+* **`main.py` (Router)**:
+    * Orchestrates the user interaction.
+    * Calculates the **Consistency Score** using pairwise semantic similarity.
+    * Decides between Direct Generation vs. RAG.
+
+## Installation
+
+### Prerequisites
+* Python 3.9+
+* A Mistral AI API Key
+
+### Setup
+
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/yourusername/consistency-rag-mistral.git](https://github.com/yourusername/consistency-rag-mistral.git)
+    cd consistency-rag-mistral
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    pip install mistralai sentence-transformers faiss-cpu datasets numpy python-dotenv beautifulsoup4
+    ```
+
+3.  **Environment Configuration**
+    Create a `.env` file in the root directory:
+    ```env
+    MISTRAL_API_KEY=your_actual_api_key_here
+    ```
+
+## Usage
+
+### 1. Build the Knowledge Base
+First, download and index the data. This creates `my_rag_db.index` and `my_rag_db.json`.
+*Note: Adjust `NB_ROWS` in the script to scale the index size.*
+
+```bash
+python indexer.py
