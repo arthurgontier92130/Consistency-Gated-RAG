@@ -25,6 +25,7 @@ except Exception as e:
 
 def retrieve_context(question, k=3):
     query_vector = embedder.encode([question], convert_to_numpy=True)
+    faiss.normalize_L2(query_vector)
     distances, indices = index.search(query_vector, k)
     
     results = []

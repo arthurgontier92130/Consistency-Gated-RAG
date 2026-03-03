@@ -8,10 +8,10 @@ This script processes a dataset of HTML documents for Retrieval-Augmented Genera
 
 import json
 import faiss
-import numpy as np
 from datasets import load_dataset
 from bs4 import BeautifulSoup
 from sentence_transformers import SentenceTransformer
+from tqdm import tqdm
 
 
 def clean_html(html_content):
@@ -32,7 +32,7 @@ def chunk_text(text, chunk_size=256, overlap=30):
 MODEL_NAME = "all-MiniLM-L6-v2"
 CHUNK_SIZE_WORDS = 200
 OVERLAP_WORDS = 30
-NB_ROWS = 100
+NB_ROWS = 20000
 
 # Initialize model and dataset
 embedder = SentenceTransformer(MODEL_NAME)
@@ -42,7 +42,7 @@ dataset = load_dataset("natural_questions", split="train", streaming=True)
 all_chunks_text = []
 all_urls = []
 
-for i, rows in enumerate(dataset):
+for i, rows in enumerate(tqdm(dataset, total=NB_ROWS, desc="Processing documents")):
     if i >= NB_ROWS:
         break
     html = rows["document"]["html"]
@@ -56,17 +56,18 @@ for i, rows in enumerate(dataset):
             all_chunks_text.append(chunk)
             all_urls.append(url)
 
-print(f"Number of documents treated: {i}")
+print(f"Number of documents treated: {i+1}")
 print(f"Number of chunks: {len(all_chunks_text)}")
 
 # Generate embeddings
-vectors = embedder.encode(all_chunks_text, convert_to_numpy=True)
+vectors = embedder.encode(all_chunks_text, convert_to_numpy=True, show_progress_bar=True)
+faiss.normalize_L2(vectors)
 print(f"Vectors shape: {vectors.shape}")
 
 ## Creation of FAISS Index
 
 dimension = vectors.shape[1]
-index = faiss.IndexFlatL2(dimension)
+index = faiss.IndexFlatIP(dimension)
 index.add(vectors)
 
 faiss.write_index(index, "my_rag_db.index")
@@ -75,7 +76,7 @@ print(f"FAISS index created.")
 
 metadata = []
 
-for text, url in zip(all_chunks_text, all_urls):
+for text, url in tqdm(zip(all_chunks_text, all_urls), total=len(all_chunks_text), desc="Creating metadata"):
     metadata.append({"text": text, "url": url})
 
 with open("my_rag_db.json", "w") as f:
