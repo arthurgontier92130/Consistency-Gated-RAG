@@ -10,6 +10,8 @@ Standard RAG systems retrieve documents on every query regardless of whether the
 
 This project implements a **consistency gate**: the model answers the same question multiple times, and the semantic agreement between those answers is used as a confidence signal. Only when the model is uncertain (i.e. answers diverge) does the system fall back to grounded retrieval.
 
+This approach falls under the broader paradigm of **agent-based RAG**, where the system autonomously decides whether to call a retrieval agent and which collection to query, rather than systematically retrieving on every input.
+
 This is grounded in two complementary ideas from the NLP literature:
 
 - **Self-Consistency** (Wang et al., 2022): sampling multiple answers from an LLM and taking the majority is more reliable than greedy decoding. Agreement across samples correlates with answer correctness.
@@ -79,7 +81,7 @@ The FAISS index is built **offline** by `indexer.py` and loaded at startup by `r
 
 ### Embedding Model: `all-MiniLM-L6-v2`
 
-A **bi-encoder** from the Sentence Transformers library. It produces 384-dimensional dense vectors that capture semantic meaning, enabling similarity search that goes beyond keyword overlap.
+A **bi-encoder** from the Sentence Transformers library. It uses **mean pooling** over all token embeddings (weighted by the attention mask) to produce a single 384-dimensional dense vector per input. This captures semantic meaning across the full input sequence, enabling similarity search that goes beyond keyword overlap. Note that the model has a **maximum sequence length of 256 word pieces** — any input beyond that is silently truncated.
 
 The same model is used in two places:
 1. **Indexing/retrieval** (in `rag.py` and `indexer.py`): to encode document chunks and queries into the same vector space.
