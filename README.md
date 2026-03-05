@@ -214,3 +214,4 @@ Open and run [`evaluation_ir.ipynb`](evaluation_ir.ipynb) to compute MAP@20 on 2
 - **Fixed threshold**: the 0.9 consistency threshold is hand-tuned. A learned or adaptive threshold (e.g. calibrated on a held-out set) would be more robust.
 - **No answer fusion**: when RAG is triggered, the original direct answers are discarded. A future version could fuse the direct and grounded answers.
 - **Knowledge base scope**: only 20,000 NQ documents are indexed. Scaling to the full dataset or a broader corpus would significantly improve recall.
+

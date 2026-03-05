@@ -30,21 +30,21 @@ def chunk_text(text, chunk_size=256, overlap=30):
 
 # Configuration
 MODEL_NAME = "all-MiniLM-L6-v2"
-CHUNK_SIZE_WORDS = 200
-OVERLAP_WORDS = 30
-NB_ROWS = 20000
+CHUNK_SIZE_WORDS = 128
+OVERLAP_WORDS = 20
+NB_ROWS = 100000
+NLIST = 256  # number of Voronoi cells for IVF index
 
 # Initialize model and dataset
 embedder = SentenceTransformer(MODEL_NAME)
-dataset = load_dataset("natural_questions", split="train", streaming=True)
+print("Downloading dataset (non-streaming for speed)...")
+dataset = load_dataset("natural_questions", split=f"train[:{NB_ROWS}]")
 
 # Process documents
 all_chunks_text = []
 all_urls = []
 
-for i, rows in enumerate(tqdm(dataset, total=NB_ROWS, desc="Processing documents")):
-    if i >= NB_ROWS:
-        break
+for i, rows in enumerate(tqdm(dataset, desc="Processing documents")):
     html = rows["document"]["html"]
     url = rows["document"]["url"]
     
@@ -64,10 +64,12 @@ vectors = embedder.encode(all_chunks_text, convert_to_numpy=True, show_progress_
 faiss.normalize_L2(vectors)
 print(f"Vectors shape: {vectors.shape}")
 
-## Creation of FAISS Index
+## Creation of FAISS IVF Index (Approximate Nearest Neighbors)
 
 dimension = vectors.shape[1]
-index = faiss.IndexFlatIP(dimension)
+quantizer = faiss.IndexFlatIP(dimension)
+index = faiss.IndexIVFFlat(quantizer, dimension, NLIST, faiss.METRIC_INNER_PRODUCT)
+index.train(vectors)
 index.add(vectors)
 
 faiss.write_index(index, "my_rag_db.index")

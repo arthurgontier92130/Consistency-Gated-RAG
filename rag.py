@@ -17,6 +17,7 @@ embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
 try:
     index = faiss.read_index("my_rag_db.index")
+    index.nprobe = 16  # number of clusters to visit for IVF search
     with open("my_rag_db.json", "r") as f:
         metadata = json.load(f)
 except Exception as e:
