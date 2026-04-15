@@ -1,29 +1,38 @@
 """Quick evaluation script — runs the same logic as evaluation_ir.ipynb"""
+import os
 from sentence_transformers import SentenceTransformer
 import faiss, json, random
 import numpy as np
 from datasets import load_dataset
 from tqdm import tqdm
 
+ROOT_DIR = os.path.join(os.path.dirname(__file__), '..')
+
+# --- Configuration ---
+NB_ROWS = 2000           # must match indexer.py
+NB_QUESTIONS_TEST = 200
+K_TOP = 20
+
 # --- Load index & metadata ---
-index = faiss.read_index("my_rag_db.index")
+print("Loading FAISS index and metadata...")
+index = faiss.read_index(os.path.join(ROOT_DIR, "my_rag_db.index"))
 index.nprobe = 16
 
-with open("my_rag_db.json", "r") as f:
+with open(os.path.join(ROOT_DIR, "my_rag_db.json"), "r") as f:
     metadata = json.load(f)
 
 indexed_urls = set(m["url"] for m in metadata)
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
+print(f"Index: {index.ntotal} vectors, {len(indexed_urls)} unique URLs")
 
-# --- Load same 100k docs used for indexing ---
-print("Loading dataset (100k)...")
-dataset = load_dataset("natural_questions", split="train[:100000]")
-
-# --- Build eval set: random 500 questions whose URL is in the index ---
-NB_QUESTIONS_TEST = 500
+# --- Load dataset (streaming to avoid downloading all 55GB) ---
+print(f"Streaming first {NB_ROWS} examples from Natural Questions...")
+dataset = load_dataset("natural_questions", split="train", streaming=True)
 
 candidates = []
-for example in tqdm(dataset, desc="Filtering candidates"):
+for i, example in enumerate(tqdm(dataset, desc="Filtering candidates", total=NB_ROWS)):
+    if i >= NB_ROWS:
+        break
     url = example["document"]["url"]
     if url in indexed_urls:
         candidates.append({
@@ -31,7 +40,7 @@ for example in tqdm(dataset, desc="Filtering candidates"):
             "ground_truth_url": url
         })
 
-print(f"Candidates with URL in index: {len(candidates)} / {len(dataset)}")
+print(f"Candidates with URL in index: {len(candidates)}")
 
 random.seed(42)
 eval_set = random.sample(candidates, min(NB_QUESTIONS_TEST, len(candidates)))
@@ -39,7 +48,6 @@ print(f"Eval set: {len(eval_set)} questions (random sample)")
 
 # --- Retrieval ---
 all_relevance_results = []
-K_TOP = 20
 
 for question in tqdm(eval_set, desc="Evaluating retrieval"):
     embedding = embedder.encode([question["question"]], convert_to_numpy=True)
@@ -48,6 +56,9 @@ for question in tqdm(eval_set, desc="Evaluating retrieval"):
 
     current_query_relevance = []
     for idx in indices[0]:
+        if idx == -1:
+            current_query_relevance.append(False)
+            continue
         found_url = metadata[idx]["url"]
         is_relevant = (found_url == question["ground_truth_url"])
         current_query_relevance.append(is_relevant)
@@ -92,7 +103,7 @@ print(f"Recall@20  : {recall_at_20:.3f}")
 
 # --- 11-Point Interpolated Precision-Recall Curve ---
 import matplotlib
-matplotlib.use("Agg")  # non-interactive backend
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 def interpolated_precision_at_recall(relevance_bools, recall_levels):
@@ -129,5 +140,6 @@ plt.ylim([0.0, 1.05])
 plt.grid(True, alpha=0.3)
 plt.xticks(recall_levels)
 plt.tight_layout()
-plt.savefig("pr_curve.png", dpi=150)
-print("\nPR curve saved to pr_curve.png")
+pr_path = os.path.join(os.path.dirname(__file__), "pr_curve.png")
+plt.savefig(pr_path, dpi=150)
+print(f"\nPR curve saved to {pr_path}")

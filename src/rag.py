@@ -3,10 +3,12 @@ import json
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from mistralai import Mistral
+from mistralai.client import Mistral
 from dotenv import load_dotenv
 
-load_dotenv()
+ROOT_DIR = os.path.join(os.path.dirname(__file__), '..')
+
+load_dotenv(os.path.join(ROOT_DIR, '.env'))
 api_key = os.getenv("MISTRAL_API_KEY")
 
 if not api_key:
@@ -16,9 +18,9 @@ client = Mistral(api_key=api_key)
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
 try:
-    index = faiss.read_index("my_rag_db.index")
+    index = faiss.read_index(os.path.join(ROOT_DIR, "my_rag_db.index"))
     index.nprobe = 16  # number of clusters to visit for IVF search
-    with open("my_rag_db.json", "r") as f:
+    with open(os.path.join(ROOT_DIR, "my_rag_db.json"), "r") as f:
         metadata = json.load(f)
 except Exception as e:
     print(f"Error loading database: {e}")

@@ -1,0 +1,412 @@
+{
+  "confident": [
+    {
+      "question": "who is said be the father of volleyball",
+      "gold": "William George Morgan",
+      "direct_answer": "William G. Morgan",
+      "consistency_score": 1.0,
+      "direct_f1": 0.6666666666666666
+    },
+    {
+      "question": "who won the first stage of the 2018 tour de france",
+      "gold": "Fernando Gaviria of Quick-Step Floors",
+      "direct_answer": "Geraint Thomas.",
+      "consistency_score": 0.9903385043144226,
+      "direct_f1": 0.0
+    },
+    {
+      "question": "who wrote the kill by 30 seconds to mars",
+      "gold": "Jared Leto",
+      "direct_answer": "Jared Leto",
+      "consistency_score": 0.9839901328086853,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who was the founder of chick fil a",
+      "gold": "S. Truett Cathy",
+      "direct_answer": "S. Truett Cathy",
+      "consistency_score": 1.0000001192092896,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "how long did it take pioneers on the oregon trail",
+      "gold": "about 160 days in 1849 to 140 days 10 years later",
+      "direct_answer": "6 months.",
+      "consistency_score": 0.979372501373291,
+      "direct_f1": 0.0
+    },
+    {
+      "question": "where was the ark of the covenant taken",
+      "gold": "Kiriath-Jearim",
+      "direct_answer": "Ethiopia (Axum).",
+      "consistency_score": 1.0,
+      "direct_f1": 0.0
+    },
+    {
+      "question": "what is the name given to the rows in the periodic table",
+      "gold": "periods",
+      "direct_answer": "Periods",
+      "consistency_score": 1.0,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who is the highest ranking member of the senate",
+      "gold": "president pro tempore",
+      "direct_answer": "The highest-ranking member of the Senate is the **Vice President of the United States**.",
+      "consistency_score": 0.9443936347961426,
+      "direct_f1": 0.15384615384615383
+    },
+    {
+      "question": "who was indian president when first nuclear test were conduct",
+      "gold": "Dr. Abdul Kalam",
+      "direct_answer": "Dr. Sarvepalli Radhakrishnan.",
+      "consistency_score": 0.9624750018119812,
+      "direct_f1": 0.3333333333333333
+    },
+    {
+      "question": "which city and state hosts the annual college world series",
+      "gold": "Omaha, Nebraska",
+      "direct_answer": "Omaha, Nebraska",
+      "consistency_score": 0.9878454804420471,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who starred in the original movie cape fear",
+      "gold": "Robert Mitchum",
+      "direct_answer": "Robert De Niro, Nick Nolte, Jessica Lange, Juliette Lewis.",
+      "consistency_score": 0.9105327725410461,
+      "direct_f1": 0.1818181818181818
+    },
+    {
+      "question": "who played the scare crow in wizard of oz",
+      "gold": "Raymond Wallace Bolger",
+      "direct_answer": "Ray Bolger",
+      "consistency_score": 1.0,
+      "direct_f1": 0.4
+    },
+    {
+      "question": "who was the first sri lankan politician who held the office of the prime minister for four times",
+      "gold": "Ranil Wickramasinghe",
+      "direct_answer": "Sirimavo Bandaranaike",
+      "consistency_score": 0.9892237782478333,
+      "direct_f1": 0.0
+    },
+    {
+      "question": "where is catholic university of east africa located",
+      "gold": "Nairobi Kenya",
+      "direct_answer": "Nairobi, Kenya",
+      "consistency_score": 0.9907695651054382,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who is the founder of red cross society",
+      "gold": "Henry Dunant",
+      "direct_answer": "Henry Dunant",
+      "consistency_score": 1.0,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who plays the black knight in monty python",
+      "gold": "John Cleese",
+      "direct_answer": "John Cleese.",
+      "consistency_score": 1.0000001192092896,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who won season 3 rupaul's drag race all stars",
+      "gold": "Trixie Mattel",
+      "direct_answer": "Trixie Mattel.",
+      "consistency_score": 0.9931092858314514,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who sang can't get enough of your love baby",
+      "gold": "Barry White",
+      "direct_answer": "Barry White",
+      "consistency_score": 1.0,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "what is the name of the pig in charlotte's web",
+      "gold": "Wilbur",
+      "direct_answer": "Wilbur",
+      "consistency_score": 0.984062910079956,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "who wrote the practice of the presence of god",
+      "gold": "Brother Lawrence (born Nicholas Herman), a 17th-century Carmelite monk",
+      "direct_answer": "Brother Lawrence.",
+      "consistency_score": 1.000000238418579,
+      "direct_f1": 0.4
+    },
+    {
+      "question": "which is the nearest star to earth after sun",
+      "gold": "Proxima Centauri",
+      "direct_answer": "Proxima Centauri",
+      "consistency_score": 0.9869248270988464,
+      "direct_f1": 1.0
+    },
+    {
+      "question": "is tomato a fruit or vegetable us supreme court",
+      "gold": "vegetable",
+      "direct_answer": "Fruit.",
+      "consistency_score": 1.0000001192092896,
+      "direct_f1": 0.0
+    }
+  ],
+  "uncertain": [
+    {
+      "question": "when does episode 5 come out for game of thrones",
+      "gold": "April 12, 2015",
+      "direct_answer": "**May 1, 2022** (for *House of the Dragon*).",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.5291694402694702,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who made the song london bridge is falling down",
+      "gold": "Unknown",
+      "direct_answer": "The origin is unknown.",
+      "rag_answer": "I don't know",
+      "consistency_score": 0.2456614375114441,
+      "direct_f1": 0.5,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who plays the first lady on house of cards",
+      "gold": "Joanna C. Going",
+      "direct_answer": "Robin Wright.",
+      "rag_answer": "Joanna Going",
+      "consistency_score": 0.7642881870269775,
+      "direct_f1": 0.0,
+      "rag_f1": 0.8
+    },
+    {
+      "question": "who is chief executive of marks and spencer",
+      "gold": "Stephen Joseph Rowe",
+      "direct_answer": "The chief executive of Marks and Spencer is **Steve Rowe** (as of my last update in 2023). For the most current information, please check the latest sources.",
+      "rag_answer": "Steve Rowe",
+      "consistency_score": 0.6449326872825623,
+      "direct_f1": 0.07407407407407407,
+      "rag_f1": 0.4
+    },
+    {
+      "question": "who won the women's championship at wimbledon this year",
+      "gold": "Garbi\u00f1e Muguruza",
+      "direct_answer": "Mark\u00e9ta Vondrou\u0161ov\u00e1",
+      "rag_answer": "Garbi\u00f1e Muguruza",
+      "consistency_score": 0.7012857794761658,
+      "direct_f1": 0.0,
+      "rag_f1": 1.0
+    },
+    {
+      "question": "who won series 7 of great british bake off",
+      "gold": "Candice Brown",
+      "direct_answer": "Yasmin",
+      "rag_answer": "Candice Brown",
+      "consistency_score": 0.15965457260608673,
+      "direct_f1": 0.0,
+      "rag_f1": 1.0
+    },
+    {
+      "question": "when did the kings of comedy come out",
+      "gold": "2000",
+      "direct_answer": "The Kings of Comedy came out in 2000.",
+      "rag_answer": "August 18, 2000",
+      "consistency_score": 0.5246924161911011,
+      "direct_f1": 0.25,
+      "rag_f1": 0.5
+    },
+    {
+      "question": "who pays the judgements on the judge mathis show",
+      "gold": "Greg Mathis",
+      "direct_answer": "The losing party.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.4824504852294922,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "the partial pressure of carbon dioxide in arterial blood is approximately",
+      "gold": "at sea level (765 mmHg) in arterial blood is between 35 mmHg and 45 mmHg",
+      "direct_answer": "The partial pressure of carbon dioxide (PaCO\u2082) in arterial blood is approximately **40 mmHg**.",
+      "rag_answer": "Between 35 mmHg and 45 mmHg.",
+      "consistency_score": 0.5614039301872253,
+      "direct_f1": 0.3571428571428571,
+      "rag_f1": 0.5714285714285715
+    },
+    {
+      "question": "who did the soviet union support in china civil war",
+      "gold": "the CCP",
+      "direct_answer": "The Soviet Union supported the **Communist Party of China (CPC)** led by Mao Zedong against the **Kuomintang (KMT)** government.",
+      "rag_answer": "CCP",
+      "consistency_score": 0.8811876177787781,
+      "direct_f1": 0.0,
+      "rag_f1": 1.0
+    },
+    {
+      "question": "who was the queen of britain during ww1",
+      "gold": "George V",
+      "direct_answer": "Queen Mary (wife of George V).",
+      "rag_answer": "Queen Mary",
+      "consistency_score": 0.8094059824943542,
+      "direct_f1": 0.5,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "where did the day of the dead originate from",
+      "gold": "celebrations in Mexico developed from ancient traditions among its pre-Columbian cultures",
+      "direct_answer": "Mexico.",
+      "rag_answer": "I don't know",
+      "consistency_score": 0.7119285464286804,
+      "direct_f1": 0.16666666666666669,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who has scored the most goals in the world cup final",
+      "gold": "Geoff Hurst",
+      "direct_answer": "Pel\u00e9 (Brazil) with 3 goals in the 1970 final.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.8180144429206848,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "what percent of the english language is greek",
+      "gold": "5.32%",
+      "direct_answer": "About **6%**.",
+      "rag_answer": "25%",
+      "consistency_score": 0.5657415390014648,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who are uncle owen and aunt beru related to",
+      "gold": "Shmi",
+      "direct_answer": "Luke and Leia.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.8843699097633362,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who voices the faceless old woman who secretly lives in your home",
+      "gold": "Mara Wilson",
+      "direct_answer": "Cree Summer",
+      "rag_answer": "Mara Wilson",
+      "consistency_score": 0.10768540948629379,
+      "direct_f1": 0.0,
+      "rag_f1": 1.0
+    },
+    {
+      "question": "where do the chicago white sox play spring training",
+      "gold": "Camelback Ranch\u2013Glendale",
+      "direct_answer": "Tempe, Arizona (Salt River Fields at Talking Stick).",
+      "rag_answer": "Camelback Ranch",
+      "consistency_score": 0.6628270745277405,
+      "direct_f1": 0.0,
+      "rag_f1": 0.5
+    },
+    {
+      "question": "who plays dylan in now you see me",
+      "gold": "Mark Ruffalo",
+      "direct_answer": "Jesse Eisenberg plays Dylan in Now You See Me.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.6842289566993713,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "how many republicans are in the senate in 2018",
+      "gold": "51",
+      "direct_answer": "As of January 2018, there were **51 Republicans** in the Senate.",
+      "rag_answer": "52",
+      "consistency_score": 0.5940871834754944,
+      "direct_f1": 0.18181818181818182,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who voiced jack in rise of the guardians",
+      "gold": "Chris Pine",
+      "direct_answer": "D.J. Cotrona",
+      "rag_answer": "Jude Law.",
+      "consistency_score": 0.27618131041526794,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who does mary camden marry in 7th heaven",
+      "gold": "Carlos Rivera",
+      "direct_answer": "Mary Camden marries Luke Baker.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.7454230785369873,
+      "direct_f1": 0.0,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "a quorum for a decision in the supreme court is",
+      "gold": "six",
+      "direct_answer": "A majority of the justices.",
+      "rag_answer": "Six justices.",
+      "consistency_score": 0.8453748226165771,
+      "direct_f1": 0.0,
+      "rag_f1": 0.6666666666666666
+    },
+    {
+      "question": "who plays the bad guy in looney tunes back in action",
+      "gold": "Steve Martin",
+      "direct_answer": "Steve Martin plays the bad guy, Mr. Chairman.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.7870015501976013,
+      "direct_f1": 0.4444444444444445,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "where is arkansas river located on a map",
+      "gold": "The Arkansas River flows through Colorado, Kansas, Oklahoma, and Arkansas, and its watershed also drains parts of Texas, New Mexico and Missouri.",
+      "direct_answer": "The **Arkansas River** flows from the Rocky Mountains in **Colorado**, through **Kansas**, **Oklahoma**, and **Arkansas**, before emptying into the **Mississippi River** in southeastern **Arkansas**.",
+      "rag_answer": "I don't know.",
+      "consistency_score": 0.8924007415771484,
+      "direct_f1": 0.42857142857142855,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who played cotton in pirates of the caribbean",
+      "gold": "David Bailie",
+      "direct_answer": "Clive Standen",
+      "rag_answer": "David Bailie",
+      "consistency_score": 0.5135673880577087,
+      "direct_f1": 0.0,
+      "rag_f1": 1.0
+    },
+    {
+      "question": "who was the first person to die in romeo and juliet",
+      "gold": "Mercutio",
+      "direct_answer": "Mercutio",
+      "rag_answer": "Mercutio",
+      "consistency_score": 0.6306585669517517,
+      "direct_f1": 1.0,
+      "rag_f1": 1.0
+    },
+    {
+      "question": "the former peterlee campus of east durham college",
+      "gold": "East Durham & Houghall Community College",
+      "direct_answer": "East Durham College",
+      "rag_answer": "Howletch site",
+      "consistency_score": 0.44650837779045105,
+      "direct_f1": 0.7499999999999999,
+      "rag_f1": 0.0
+    },
+    {
+      "question": "who is the actor that plays the hound",
+      "gold": "Rory McCann",
+      "direct_answer": "Pedro Pascal",
+      "rag_answer": "Rory McCann",
+      "consistency_score": 0.5470502972602844,
+      "direct_f1": 0.0,
+      "rag_f1": 1.0
+    }
+  ]
+}

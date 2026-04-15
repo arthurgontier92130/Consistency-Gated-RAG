@@ -1,10 +1,13 @@
 import os
+import sys
 from sentence_transformers import SentenceTransformer, util
-from mistralai import Mistral
+from mistralai.client import Mistral
 from dotenv import load_dotenv
+
+sys.path.insert(0, os.path.dirname(__file__))
 import rag
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 api_key = os.getenv("MISTRAL_API_KEY")
 client = Mistral(api_key=api_key)
 
@@ -45,7 +48,7 @@ def main():
         
         print(f"[ROUTER] Score de confiance: {score:.2f}")
         
-        if score > CONSISTENCY_THRESHOLD:
+        if score >= CONSISTENCY_THRESHOLD:
             print(f"VALIDE : Le modele connait la reponse !")
             print(f"\n Reponse: \n{answers[0]}")
         else:
